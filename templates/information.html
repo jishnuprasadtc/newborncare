@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/information.css">
+    <title>Information</title>
+</head>
+<body style="background-image: url(https://images.pexels.com/photos/2505101/pexels-photo-2505101.jpeg?auto=compress&cs=tinysrgb&w=600); background-repeat: no-repeat; background-size:cover ;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'combined_view' %}">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link text-white">Welcome, {{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'parentadd' %}">Add Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>               
+
+
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post" onsubmit="return confirm('Are you sure you want to log out?');">
+                            {% csrf_token %}
+                            <button type="submit" class=" nav-link text-white" style="text-decoration: none; color: inherit;">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                    
+                    
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+
+
+                                        <!-- Notifications Section -->
+
+
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h3>Notifications</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for notification in info %}
+                        <li class="list-group-item">
+                            <strong>{{ notification.title }}</strong><br>
+                            {{ notification.description }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item text-muted">No notifications available.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+            </div>
+            <div class="col-md-1"> </div>
+            <div class="col-md-3">
+
+                <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                    <a href="https://nhm.gov.in/"><img src="https://pbs.twimg.com/media/Em2XXYAVEAAf1p7?format=jpg&name=small" class="card-img-top" alt=""></a>
+                </div>
+
+
+
+                <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                   <a href="https://nhm.gov.in/"><img src="https://www.alliedmarketresearch.com/assets/sampleimages/mother-child-healthcare-market-2021-2030-1625138749.jpeg" class="card-img-top" alt=""></a> 
+
+                </div>
+            </div>
+            
+            <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                <a href="https://nhm.gov.in/"><img src="data:image/jpeg;base64,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" class="card-img-top" alt=""></a>
+            </div>
+
+            <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded ms-5" style="width: 18rem;">
+                <a href="https://www.pregnancybirthbaby.org.au/guide-to-preventing-your-baby-having-falls-infographic"><img src="https://media.healthdirect.org.au/images/inline/original/pbb-falls-infographic-aada33.png" class="card-img-top" alt=""></a> 
+
+             </div>
+             
+                <div class="card shadow-sm ms-5 d-flex mb-3" style="width: 15rem;">
+                    <h5 class="card-title fw-bold">Ashaworker Details</h5>
+                    <img src="https://forum.susana.org/media/kunena/attachments/1868/pop.jpg" alt="image">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people-fill text-primary mb-3" style="font-size: 3rem;"></i>
+                        <p class="card-text text-muted mb-4">For any doubt or assistance, contact our Ashaworkers</p>
+                        <a href="{% url 'asha-listing' %}" class="btn btn-outline-secondary">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+            
+
+             
+        </div>
+        
+<!-- ---------------------------------------------------------- -->
+   
+        <div class="row">
+
+            <div class="col-3">
+
+
+                <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                    <a href="https://www.who.int/"><img src="https://cdn.who.int/media/images/default-source/initiatives/uhc-advice/who-cards-02-newborns-01.tmb-1920v.jpg?sfvrsn=bd7487ba_4" class="card-img-top" alt=""></a>
+                </div>
+
+                <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                    <a href="https://www.who.int/"><img src="https://cdn.who.int/media/images/default-source/initiatives/uhc-advice/who-cards-02-newborns-02.tmb-1920v.jpg?sfvrsn=2243ddc3_5" class="card-img-top" alt=""></a>
+                </div>
+
+
+                
+
+
+
+
+                
+
+
+
+            </div>
+
+
+            <div class="col-8">
+
+                
+
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h3>Guidelines</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for guildline in guild %}
+                                <li class="list-group-item">
+                                    <strong>{{ guildline.title }}</strong><br>
+                                    {{ guildline.description }}
+                                
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item text-muted">No guidelines available.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-1">
+                
+            </div>
+
+            
+            <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded ms-5" style="width: 18rem;">
+                <a href="https://www.who.int/"><img src="https://cdn.who.int/media/images/default-source/initiatives/uhc-advice/who-cards-02-newborns-06.tmb-1920v.jpg?sfvrsn=6f85a822_5" class="card-img-top" alt=""></a>
+            </div>
+
+
+            <div class="card border  shadow-lg p-3 mb-5 bg-body-tertiary rounded ms-5" style="width: 18rem;">
+                <a href="https://www.who.int/"><img src="https://cdn.who.int/media/images/default-source/initiatives/uhc-advice/who-cards-11-rights-newborns-03.tmb-1920v.jpg?sfvrsn=bde87cb8_2" class="card-img-top" alt=""></a>
+            </div>
+
+            <a href="{% url 'child-vaccine' %}">
+                <button type="submit" class="fs-1 mb-3 ms-5 btn btn-secondary d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2" style="--bs-focus-ring-x: 10px; --bs-focus-ring-y: 10px; --bs-focus-ring-blur: 4px">
+                    
+                   Vaccination Details Click Here!  </button>
+            </a>
+
+        
+        
+            
+
+            
+        </div>
+    
+        </div>
+
+
+        
+
+       
+        
+
+
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <p>&copy; 2025 Dashboard | All Rights Reserved</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
