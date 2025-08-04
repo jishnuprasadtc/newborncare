@@ -17,7 +17,7 @@ from . forms import ParentCreateform,informationForms
 
 class Dashboard(View):
     def get(self, request):
-        return render(request, 'dashboad.html')
+        return render(request,'dashboad.html')
 
 
 def RegistraionView(request):
