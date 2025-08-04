@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn projectname.wsgi:application"
+    plan: free
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: newborncare.settings
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        value: your-secret-key
+      - key: ALLOWED_HOSTS
+        value: your-app-name.onrender.com
